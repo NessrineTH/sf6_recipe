@@ -1,0 +1,65 @@
+<nav class="navbar navbar-expand navbar-light navbar-bg ">
+	<a class="sidebar-toggle">
+		<i class="hamburger align-self-center"></i>
+	</a>
+
+	<ul class="navbar-nav">
+		{% if (menu | length) > 0 %}
+			<li class="nav-item px-2 dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<i class="align-middle" data-feather="settings"></i>
+					actions
+				</a>
+				<div class="dropdown-menu dropdown-menu-start dropdown-mega" aria-labelledby="servicesDropdown">
+					<div class="d-md-flex align-items-start justify-content-start">
+						{% for item in menu %}
+							<div class="dropdown-mega-list">
+								<div class="dropdown-header">
+									{% if item.iclass %}
+										{#<i class="{{ item.iclass }}"></i>#}
+									{% endif %}
+									<span class="text-muted">{{ item.label | upper | raw }}</span>
+								</div>
+								{% if item.hasSub %}
+									{% for itemSub in item.child %}
+										<a class="dropdown-item" href="{% if itemSub.url is defined and itemSub.url %}{{ itemSub.url }}{% else %}javascript:;{% endif %}" {% if itemSub.onclick is defined and itemSub.onclick %} onclick="{{ itemSub.onclick }}" {% endif %} {% if itemSub.id is defined and itemSub.id %} id="{{ itemSub.id }}" {% endif %}>
+											{{ itemSub.label | raw }}
+										</a>
+									{% endfor %}
+								{% endif %}
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+			</li>
+		{% endif %}
+	</ul>
+
+			<button type="button" class="btn btn-link text-secondary" data-bs-toggle="modal" data-bs-target="#ticketModal">
+		<i class="align-middle" data-feather="mail"></i>
+			Support technique
+		</button>
+
+	<div class="navbar-collapse collapse">
+		<ul class="navbar-nav navbar-align">
+		
+			<li class="nav-item" id="admsearchbtn" data-url="">
+				<a class="nav-icon d-none d-sm-inline-block  js-settings-toggle" >
+					<i class="align-middle" data-feather="search"></i>
+				</a>
+			</li>
+			
+			<li class="nav-item dropdown">
+
+				<a class="nav-icon d-none d-sm-inline-block" href="#">
+					<i class="align-middle" data-feather="power"></i>
+				</a>
+				{%  if app.user is not null%}
+					<a class="nav-link d-none d-sm-inline-block" href="#">
+						<span class="text-dark">{{ app.user.username }}</span>
+					</a>
+				{% endif %}
+			</li>
+		</ul>
+	</div>
+</nav>

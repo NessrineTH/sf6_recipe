@@ -1,0 +1,7 @@
+{{ grid_scripts(grid.grid) }}
+
+<script type="text/javascript">
+    function refreshGrid() {
+        {{ grid.grid.hash }}_goto('{{ grid.grid.routeUrl }}');
+    }
+</script>

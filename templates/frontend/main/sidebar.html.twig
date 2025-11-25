@@ -1,0 +1,56 @@
+<nav id="sidebar" class="sidebar">
+	<div class="sidebar-content js-simplebar">
+
+		<a class="sidebar-brand" href="{{ path('frontend_index') }}">
+			<img src="{{ asset('frontend/media/logo_default.png') }}" alt="" style="max-width:80%;">
+			<span class="align-middle me-3">
+				<div class="text-muted">
+				{{ application_name }}
+				</div>
+			</span>
+		</a>
+
+		<ul class="sidebar-nav">
+			{% for k, item in menu_sub %}
+				{% if item.type == 'header' %}
+					<li class="sidebar-header">
+						{{ item.label | raw }}
+					</li>
+				{% endif %}
+				{% if item.type == 'item' %}
+					{% if not item.hasSub %}
+						<li class="sidebar-item {{ item.active ? 'active' : '' }} {{ item.css }}">
+							<a href="{% if item.url is defined and item.url %}{{ item.url }}{% else %} javascript:;{% endif %}" {% if item.id is defined and item.id %} id="{{ item.id }}" {% endif %} class="sidebar-link">
+								{% if item.iclass %}
+									<i class="align-middle" data-feather="{{ item.iclass }}"></i>
+								{% endif %}
+								<span>{{ item.label | raw }}</span>
+							</a>
+						</li>
+					{% else %}
+						<li class="sidebar-item {{ item.css }}  {{ item.active is defined and item.active ? 'active' : '' }}">
+							<a data-bs-target="#sbm{{ k }}" data-bs-toggle="collapse" class="sidebar-link collapsed">
+								{% if item.iclass %}
+									<i class="align-middle" data-feather="{{ item.iclass }}"></i>
+								{% endif %}
+								<span>{{ item.label | raw }}</span>
+							</a>
+							<ul id="sbm{{ k }}" class="sidebar-dropdown list-unstyled collapse  {{ item.active is defined and item.active ? 'show' : '' }}" data-bs-parent="#sidebar">
+								{% for itemSub in item.child %}
+									<li class="sidebar-item {{ itemSub.active is defined and itemSub.active ? 'active' : '' }}">
+										<a href="{% if itemSub.url is defined and itemSub.url %}{{ itemSub.url }}{% else %}javascript:;{% endif %}" class="sidebar-link">
+											{% if itemSub.iclass %}
+												<i class="align-middle" data-feather="{{ itemSub.iclass }}"></i>
+											{% endif %}
+											{{ itemSub.label | raw }}
+										</a>
+									</li>
+								{% endfor %}
+							</ul>
+						</li>
+					{% endif %}
+				{% endif %}
+			{% endfor %}
+		</ul>
+	</div>
+</nav>

@@ -1,0 +1,25 @@
+{% extends 'frontend/layout.html.twig' %}
+
+{% block page_title %}
+    Produits
+{% endblock %}
+
+{% block page_menu %}
+    {# Ajouter ici un bouton qui pour ajouter un nouveau produit  #}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            {{ form_start(form) }}
+            {{ form_row(form.lib) }}
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+{% endblock content %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

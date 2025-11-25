@@ -1,0 +1,21 @@
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+/vendor/
+
+###> liip/imagine-bundle ###
+/public/media/cache/
+###< liip/imagine-bundle ###
+
+###< tools ###
+/tools/
+###> tools ###
+
+.vscode/launch.json
+/pm_*
+/.idea
+/.php-cs-fixer.cache

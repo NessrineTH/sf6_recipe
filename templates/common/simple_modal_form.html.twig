@@ -1,0 +1,18 @@
+<form action="{{ form_action }}" method="post" id="simple_modal_form">
+    <div class="modal-dialog {% block modal_large %}modal-lg{% endblock modal_large %}">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"> {% block title %} {% endblock title %} </h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" onclick="$('#eps_popup').modal('hide');return false;"></button>
+            </div>
+            <div class="modal-body">
+                {% block content %}
+                {% endblock content %}
+                <div class="modal-footer">
+                    {% block btn_cancel %}&nbsp;<button type="button" data-dismiss="modal" onclick="$('#eps_popup').modal('hide');return false;" class="btn btn-default">Annuler</button>{% endblock btn_cancel %}
+                    {% block submit %}&nbsp;<button class="btn btn-success" type="submit">Enregistrer</button>{% endblock submit %}
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

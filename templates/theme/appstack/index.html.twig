@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>
+        {% block title %}Title
+        {% endblock %}
+    </title>
+    <link rel="icon" href="/coreadminz/favicon.png?1"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet"/>
+    <link class="js-stylesheet" href="{{ asset('assets/theme/appstack/css/light.css') }}" rel="stylesheet"/>
+    <link class="js-stylesheet" href="{{ asset('assets/theme/appstack/css/search.css') }}" rel="stylesheet"/>
+    {% if layout_appstack_data_theme is defined and 'colored' == layout_appstack_data_theme %}
+        <link class="js-stylesheet" href="{{ asset('assets/theme/appstack/css/colored.css') }}" rel="stylesheet"/>
+    {% endif %}
+    {% if layout_appstack_data_theme is defined and 'dark' == layout_appstack_data_theme %}
+        <link class="js-stylesheet" href="{{ asset('assets/theme/appstack/css/dark.css') }}" rel="stylesheet"/>
+    {% endif %}
+    {% block head_style %}
+        {# #}
+    {% endblock %}
+    {% block head_script %}
+        {# #}
+    {% endblock head_script %}
+    {% block head_bottom %}
+        {# #}
+    {% endblock head_bottom %}
+</head>
+{#
+<!--
+    HOW TO USE:
+    data-theme: default (default), dark, light
+    data-layout: fluid (default), boxed
+    data-sidebar-position: left (default), right
+    data-sidebar-behavior: sticky (default), fixed, compact
+-->
+#}
+{% if layout_appstack_data_theme is not defined %}
+    {% set layout_appstack_data_theme = 'default' %}
+{% endif %}
+<body data-theme="{{ layout_appstack_data_theme }}" data-layout="fluid" data-sidebar-position="left"
+      data-sidebar-behavior="sticky" class="{% block bodyclass %}{% endblock %}">
+{% block body_content %}
+    <div class="wrapper">
+        {% block navbar %}
+            {% include 'theme/appstack/_sidebar_example.html.twig' %}
+        {% endblock navbar %}
+        <div class="main">
+            {% block topbar %}
+                {% include 'theme/appstack/_topbar_example.html.twig' %}
+            {% endblock topbar %}
+
+            {% block form_global_start %}{% endblock form_global_start %}
+
+            {% block pre_content %}
+                <div class="sticky-top  pl-5 pt-3 bg-light">
+                    <div class="container-fluid  p-5 pt-0">
+                        <h1 class="float-start text-dark">
+                            {% block page_title %}
+                                {# #}
+                            {% endblock %}
+                        </h1>
+                        <div class="float-end">
+                            {% block page_menu %}
+                                {# #}
+                            {% endblock %}
+                        </div>
+                    </div>
+                </div>
+            {% endblock pre_content %}
+
+            <main class="content">
+                <div class="{% block container_base_class %}container-fluid{% endblock container_base_class %} {% block container_class %}{% endblock container_class %} p-0">
+                    <div id="alert-flash-message">
+                        {% for key, flashs in app.flashes %}
+                            {% for flash in flashs %}
+                                <div class="alert alert-{{ key }} alert-outline-coloured alert-dismissible"
+                                     role="alert">
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                    <div class="alert-icon">
+                                        <i class="far fa-fw fa-bell"></i>
+                                    </div>
+                                    <div class="alert-message">
+                                        {{ flash |trans()|raw }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+
+                    {% block page_before_contentcard %}{% endblock page_before_contentcard %}
+
+                    {% block content_all %}
+                        {% block content_precard %}{% endblock content_precard %}
+                        <div class="card">
+                            {% block content_header %}{% endblock content_header %}
+                            <div class="card-body">
+                                {% block content %}{% endblock content %}
+                            </div>
+                        </div>
+                    {% endblock content_all %}
+                </div>
+            </main>
+            {% block form_global_end %}{% endblock form_global_end %}
+            {% block footerwrapper %}{% endblock footerwrapper %}
+        </div>
+    </div>
+{% endblock body_content %}
+
+{% block search %}
+    {% include 'theme/appstack/_search_panel.html.twig' %}
+{% endblock search %}
+
+<div class="modal fade" id="eps_popup" tabindex="-1" aria-hidden="true"></div>
+<div class="modal fade" id="eps_popup_nohide" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true"></div>
+<div class="modal fade" id="eps_popup_confirm" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-light">
+                <h5 class="modal-title">Confirmation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="description">Cette action est définitive : continuer ?</p>
+            </div>
+            <div class="modal-footer bg-light">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Non</button>
+                <button type="button" class="btn btn-primary modal-success-btn" data-bs-dismiss="modal">Oui</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="eps_popup_content" tabindex="-1">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+            <div class="modal-header bg-light">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer bg-light">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="eps_popup_alert" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-light">
+                <h5 class="modal-title">Info</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="description">OK</p>
+            </div>
+            <div class="modal-footer bg-light">
+                <button type="button" class="btn btn-primary modal-success-btn" data-bs-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{{ asset('assets/theme/appstack/js/app.js') }}"></script>
+<script src="{{ asset('assets/theme/appstack/js/search.js') }}"></script>
+<script src="{{ asset('assets/vendors/autosize/autosize.min.js') }}"></script>
+<script src="{{ asset('assets/js/eps_common.1.2.js') }}"></script>
+{% block foot_script %}
+    <script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script type="text/javascript" src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script type="text/javascript">
+        $(document).ajaxError(function (event, jqXHR) {
+            if (403 === jqXHR.status) {
+                window.location.reload();
+            }
+        });
+    </script>
+{% endblock foot_script %}
+{% block javascripts %}{% endblock javascripts %}
+
+</body>
+</html>

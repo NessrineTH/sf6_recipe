@@ -1,0 +1,27 @@
+{% extends 'theme/appstack/index.html.twig' %}
+
+{#% set layout_appstack_data_theme = 'light' %#}
+
+{% block title %}
+	Kickstarter -
+	{{ app.request.httpHost }}
+{%  endblock %}
+
+{% block head_style %}
+	{{ parent() }}
+	<link href="//fonts.googleapis.com/css?family=Reenie+Beanie:regular" rel="stylesheet" type="text/css">
+{% endblock head_style %}
+
+{% block navbar %}
+	{{ render(controller('App\\Controller\\Frontend\\MainController::sidebar', {'section': app.request.attributes.get('section')})) }}
+{% endblock navbar %}
+
+{% block topbar %}
+	{{ render(controller('App\\Controller\\Frontend\\MainController::topbar', {'section': app.request.attributes.get('section')})) }}
+{% endblock topbar %}
+
+
+{% block javascripts %}
+	{{parent()}}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+{% endblock %}

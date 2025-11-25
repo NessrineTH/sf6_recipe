@@ -1,0 +1,42 @@
+{% if form_horizontal is defined and form_horizontal %}
+	{% form_theme form 'bootstrap_5_horizontal_layout.html.twig' %}
+{% else %}
+	{% form_theme form 'bootstrap_5_layout.html.twig' %}
+{% endif %}
+
+
+{% block form_group_class -%}
+col-sm-8
+{%- endblock form_group_class %}
+
+{% block form_label_class -%}
+col-sm-4
+{%- endblock form_label_class %}
+
+
+{{ form_start(form, {'attr': {'id': 'form_modal', 'class' : 'form-condensed' }}) }}
+<div class="modal-dialog modal-xl">
+	<div class="modal-content">
+		<div class="modal-header">
+			<h5 class="modal-title">{{ title }}</h5>
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body">
+			<div class="row">
+			{% if intro is defined and intro %}
+				<div class="col-md-12 text-warning text-center mb-3">
+					{{ intro | raw }}
+				</div>
+			{% endif %}
+				<div class="col-md-12">
+					{{ form_widget(form) }}
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			&nbsp;<button type="button" data-bs-dismiss="modal" class="btn btn-secondary">Annuler</button>
+			&nbsp;<button class="btn btn-success" type="submit">Enregistrer</button>
+		</div>
+	</div>
+</div>
+{{ form_end(form) }}

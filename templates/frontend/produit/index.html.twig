@@ -1,0 +1,39 @@
+{% extends 'frontend/layout.html.twig' %}
+
+{% block page_title %}
+    Produits
+{% endblock %}
+
+{% block page_menu %}
+    {# Ajouter ici un bouton qui pour ajouter un nouveau produit  #}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>code</th>
+                    <th>Lib</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for produit in produits %}
+                    <tr>
+                        <td>{{ produit.id }}</td>
+                        <td>{{ produit.code }}</td>
+                        <td>{{ produit.lib }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock content %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

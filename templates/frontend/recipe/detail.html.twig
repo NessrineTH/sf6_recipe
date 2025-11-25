@@ -1,0 +1,30 @@
+{% extends 'frontend/layout.html.twig' %}
+
+{% block page_title %}
+	{{ recipe.nom }}
+{% endblock %}
+
+{% block page_menu %}{% endblock %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table table-sm">
+				<tbody>
+					{% for ingredient in recipe.ingredients %}
+						<tr>
+							<td>{{ ingredient.nom }}</td>
+							<td>{{ ingredient.quantite }}</td>
+						</tr>
+
+					{% endfor %}
+				</tbody>
+			</table>
+
+		</div>
+	</div>
+{% endblock content %}
+
+{% block javascripts %}
+	{{ parent() }}
+{% endblock %}
