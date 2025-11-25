@@ -20,7 +20,7 @@ class Produit
     #[ORM\Column(length: 255)]
     private ?string $lib = null;
 
-    #[ORM\Column(length: 10)]
+    #[ORM\Column]
     private ?string $code = null;
 
     public function getId(): ?int
