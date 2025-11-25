@@ -1,3 +1,0 @@
-eps_cloudflare:
-  site_key: '%env(CLOUD_FLARE_SITE_KEY)%'
-  secret_key: '%env(CLOUD_FLARE_SECRET_KEY)%'

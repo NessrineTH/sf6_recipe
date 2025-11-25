@@ -3,10 +3,7 @@
 namespace App\Controller\Frontend;
 
 use App\Controller\CommonBaseController;
-use App\Entity\AdminUtilisateur;
-use App\Service\ParamService;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
@@ -17,10 +14,9 @@ class BaseController extends CommonBaseController
 
     public function __construct(
         private readonly EntityManagerInterface $em,
-        private readonly ParamService $paramManager,
         private readonly KernelInterface $kernel,
     ) {
-        parent::__construct($em, $paramManager);
+        parent::__construct($em);
     }
 
     public function flashMessage(string $message, string $title = 'Information'): void

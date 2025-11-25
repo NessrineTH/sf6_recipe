@@ -6,9 +6,6 @@
 parameters:
     locale: "fr"
 
-eps_param:
-    default_val_dir: "config_eps/EPSParams"
-
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -32,13 +29,12 @@ services:
 
     APY\DataGridBundle\Grid\Grid: "@grid"
 
-    App\Service\ParamService:
-        arguments:
-            $defaut_values_dir: "%eps_param.default_val_dir%"
-
     App\Service\EmailService:
         arguments:
             $defaultFrom: "%env(EMAIL_SENDER)%"
             $destError: "%env(EMAIL_TECHNIQUE)%"
             $codeUniqueInstall: "%env(CODE_UNIQUE_INSTALLATION)%"
             $applicationName: "%env(APPLICATION_NAME)%"
+    annotation_reader:
+        class: Doctrine\Common\Annotations\AnnotationReader
+        public: false
